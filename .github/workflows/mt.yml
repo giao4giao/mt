@@ -22,7 +22,16 @@ jobs:
         run: pip install requests
       - name: 'Working'
         env:
-          SCKEY: ${{ secrets.USERNAME }}
-                 ${{ secrets.PASSWORD }}
+          USERNAME: ${{ secrets.USERNAME }}
+          PASSWORD: ${{ secrets.PASSWORD }}
         run: python mt论坛.py
+
+
+
+
+
+
+
+
+
 
