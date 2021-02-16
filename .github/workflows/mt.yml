@@ -24,5 +24,5 @@ jobs:
         env:
           SCKEY: ${{ secrets.USERNAME }}
                  ${{ secrets.PASSWORD }}
-        run: python /mt论坛.py
+        run: python mt论坛.py
 
