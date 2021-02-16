@@ -1,5 +1,5 @@
 import requests,re,os
- 
+print(os.environ)
 username = os.environ["USERNAME"]
 password = os.environ["PASSWORD"]
  
