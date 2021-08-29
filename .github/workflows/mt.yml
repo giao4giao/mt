@@ -24,6 +24,9 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
+          MAIL_PASS:  ${{ secrets.MAIL_PASS }}
+          SENDER: ${{ secrets.SENDER }}
+          RECEIVERS: ${{ secrets.RECEIVERS }}
         run: python mt论坛.py
 
 
