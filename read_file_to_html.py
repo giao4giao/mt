@@ -1,9 +1,13 @@
 # -*- coding:utf-8 -*-
-import datetime
+from datetime import datetime,timedelta,timezone
 
 def read_to_html(dic):
 	with open('index.html','r',encoding='utf-8')as f:
 		html = f.read()
+	SHA_TZ = timezone(
+		timedelta(hours=8),
+		name='Asia/Shanghai',
+	)
 	content = f'''\
 	<li>欢迎: <span>{dic.get('name')}</span></li>
 	<li><br></li>
@@ -13,7 +17,7 @@ def read_to_html(dic):
 	<li>签到总天数: <span>{dic.get('all_day')}</span></li>
 	<li>签到排名: <span>{dic.get('num')}</span></li>
 	<li><br></li>
-	<li>签到时间: <span>{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</span></li>
+	<li>签到时间: <span>{datetime.utcnow().replace(tzinfo=timezone.utc).astimezone(SHA_TZ).strftime('%Y-%m-%d %H:%M:%S')}</span></li>
 	'''.replace('\t','')
 	dic = {
 		'content':content,
