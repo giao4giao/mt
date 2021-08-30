@@ -88,7 +88,7 @@ def start():
             print('签到成功')
             push_text = push_text + '签到成功'
             print(push_text)
-            return get_more_data(page_text)
+            return get_more_data(session.get(headers=headers, url=getHash_url1).text)
         else:
             print('签到失败')
             push_text = push_text + '签到失败'
