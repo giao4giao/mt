@@ -54,6 +54,8 @@ def start():
     getHash_url = 'https://bbs.binmt.cc/member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
     session.get(headers=headers, url=getHash_url)
     time.sleep(10)
+    session.get(headers=headers, url=getHash_url)
+    time.sleep(10)
     page_text = session.get(headers=headers, url=getHash_url).text
     loginhash_ex = 'loginhash=(.*?)">'
     formhash_ex = 'formhash" value="(.*?)".*? />'
