@@ -1,3 +1,5 @@
+import time
+
 import requests
 import os
 import re
@@ -50,9 +52,12 @@ def start():
     }
     # 获取登陆所需loginhash和formhash
     getHash_url = 'https://bbs.binmt.cc/member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
+    session.get(headers=headers, url=getHash_url)
+    time.sleep(10)
     page_text = session.get(headers=headers, url=getHash_url).text
     loginhash_ex = 'loginhash=(.*?)">'
     formhash_ex = 'formhash" value="(.*?)".*? />'
+
     loginhash = re.findall(loginhash_ex, page_text, re.S)[0]
     formhash = re.findall(formhash_ex, page_text, re.S)[0]
     # print(loginhash, formhash)
