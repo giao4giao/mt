@@ -52,11 +52,11 @@ def start():
     }
     # 获取登陆所需loginhash和formhash
     getHash_url = 'https://bbs.binmt.cc/member.php?mod=logging&action=login&infloat=yes&handlekey=login&inajax=1&ajaxtarget=fwin_content_login'
-    session.get(headers=headers, url=getHash_url)
-    time.sleep(10)
-    session.get(headers=headers, url=getHash_url)
-    time.sleep(10)
+    # session.get(headers=headers, url=getHash_url)
+    # time.sleep(10)
     page_text = session.get(headers=headers, url=getHash_url).text
+    print(page_text)
+
     loginhash_ex = 'loginhash=(.*?)">'
     formhash_ex = 'formhash" value="(.*?)".*? />'
 
@@ -112,4 +112,4 @@ if __name__ == '__main__':
     data = start()
     html = read_to_html(data)
     mail = Mail()
-    mail.send(html)
+    # mail.send(html)
