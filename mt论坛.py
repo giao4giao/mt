@@ -113,4 +113,4 @@ if __name__ == '__main__':
     data = start()
     html = read_to_html(data)
     mail = Mail()
-    # mail.send(html)
+    mail.send(html)
