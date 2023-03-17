@@ -21,6 +21,17 @@ dic = {
     'nine':'9',
 }
 
+
+def catch(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(e)
+            return False
+    return wrapper
+
+
 def get_more_data(text):
     def get_num(i):
         num = ''
@@ -44,7 +55,7 @@ def get_more_data(text):
         dic_['name'] = dates[0]  # 获取名字
     return dic_
 
-
+@catch
 def start():
     session = requests.Session()
     push_text = 'mt论坛：'
