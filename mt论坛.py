@@ -4,8 +4,9 @@ import requests
 import os
 import re
 # print(os.environ)
-username = os.environ["USERNAME"]
-password = os.environ["PASSWORD"]
+username = os.environ.get("USERNAME")
+password = os.environ.get("PASSWORD")
+
 
 dic = {
     'zero':'0',
@@ -104,13 +105,20 @@ def start():
         print('登陆失败')
         push_text = push_text + '登陆失败，'
     print(push_text)
- 
 
- 
+
+
+
 if __name__ == '__main__':
     from read_file_to_html import read_to_html
     from mail_to import Mail
+    if not username or not password:
+        print("请设置环境变量 USERNAME PASSWORD")
+        exit(1)
     data = start()
     html = read_to_html(data)
     mail = Mail()
-    mail.send(html)
+    if mail.send(html):
+        print("发送成功")
+    else:
+        print("发送失败")
