@@ -132,4 +132,5 @@ if __name__ == '__main__':
     if mail.send(html):
         print("发送成功")
     else:
+        print(html)
         print("发送失败")
