@@ -1,4 +1,3 @@
-
 name: 'mt'
 
 on:
@@ -6,28 +5,31 @@ on:
     branches: 
       - master
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 每天utc时间触发
 
 jobs:
   leetcode-weekly:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 使用linux系统
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # 导入项目文件
       - name: 'Set up Python'
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v1 # 安装python环境
         with:
-          python-version: 3.7
-      - name: 'Install requirements'
-        run: pip install requests
+          python-version: 3.7 # python版本
+      - name: 'Install requirements' # 安装运行依赖
+        run: pip install -r requirements.txt
       - name: 'Working'
-        env:
-          USERNAME: ${{ secrets.USERNAME }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          MAIL_PASS:  ${{ secrets.MAIL_PASS }}
-          SENDER: ${{ secrets.SENDER }}
-          RECEIVERS: ${{ secrets.RECEIVERS }}
-        run: python mt论坛.py
+        env: # 获取环境变量
+          USERNAME: ${{ secrets.USERNAME }}     # 用户名
+          PASSWORD: ${{ secrets.PASSWORD }}     # 密码
+          MAIL_PASS:  ${{ secrets.MAIL_PASS }}  # 邮箱授权码
+          SENDER: ${{ secrets.SENDER }}         # 邮件发送方
+          RECEIVERS: ${{ secrets.RECEIVERS }}   # 邮件接收方
+          MAIL_HOST: ${{ secrets.MAIL_HOST }}   # 邮箱服务器
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}   # 邮件端口
+          SEND: ${{ secrets.SEND }}             # 是否发送邮件
+        run: python main.py # 运行入口
 
 
 
