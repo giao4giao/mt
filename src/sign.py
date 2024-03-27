@@ -8,7 +8,7 @@ from urllib import parse
 
 import requests
 
-if sys.version_info < (3, 8):
+if sys.version_info < (3, 8): # 兼容3.7版本的python
     os.system('pip install typing_extensions')
     from typing_extensions import Literal
 else:
@@ -55,6 +55,8 @@ class MtSignClass:
         res = self.session.get(url=self.login_url, params=params, headers=self.headers)
         if res.ok:
             page_text = res.text
+            if re.search('/_guard/html.js\?js=slider_html',page_text):
+                raise ValueError('触发了滑动验证码，暂时无解') # TODO 滑动验证码
             login_hash = re.findall('loginhash=(.*?)">', page_text, re.S)[0]
             form_hash = re.findall('formhash" value="(.*?)".*? />', page_text, re.S)[0]
             return login_hash, form_hash
